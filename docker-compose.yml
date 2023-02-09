@@ -1,0 +1,61 @@
+version: '2'
+services:
+  mariadb:
+    image: docker.io/bitnami/mariadb:10.4
+    container_name: mariadb
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_magento
+      - MARIADB_DATABASE=bitnami_magento
+    volumes:
+      - 'mariadb_data:/bitnami/mariadb'
+    ports:
+      - '8181:3306'
+  phpmyadmin-mariadb:
+          image: phpmyadmin/phpmyadmin
+          container_name: phpmyadmin-mariadb
+          links:
+            - mariadb
+          environment:
+            - MYSQL_ROOT_PASSWORD=
+            - PMA_HOST=mariadb
+            - PMA_PORT=3306
+          ports:
+            - '8088:80'
+          restart: always
+  magento:
+    image: docker.io/bitnami/magento:2.4.5-p1-debian-11-r27
+    container_name: magento
+    ports:
+      - '8182:8080'
+      - '443:8443'
+    environment:
+      - MAGENTO_HOST=localhost:8182
+      - MAGENTO_DATABASE_HOST=mariadb
+      - MAGENTO_DATABASE_PORT_NUMBER=3306
+      - MAGENTO_DATABASE_USER=bn_magento
+      - MAGENTO_DATABASE_NAME=bitnami_magento
+      - ELASTICSEARCH_HOST=elasticsearch
+      - ELASTICSEARCH_PORT_NUMBER=9200
+      - REQUEST_URI=http://localhost:8182/
+      - MAGE_IS_DEVELOPER_MODE=true
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - './magento_data:/bitnami/magento'
+    depends_on:
+      - mariadb
+      - elasticsearch
+  elasticsearch:
+    image: docker.io/bitnami/elasticsearch:7
+    container_name: elasticsearch
+    volumes:
+      - 'elasticsearch_data:/bitnami/elasticsearch/data'
+volumes:
+  mariadb_data:
+    driver: local
+  magento_data:
+    driver: local
+  elasticsearch_data:
+    driver: local
