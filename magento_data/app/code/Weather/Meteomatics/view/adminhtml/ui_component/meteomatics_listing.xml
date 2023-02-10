@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">meteomatics_listing.meteomatics_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>meteomatics_columns</spinner>
+        <deps>
+            <dep>meteomatics_listing.meteomatics_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="meteomatics_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Weather::meteomatics</aclResource>
+        <dataProvider class="Weather\Meteomatics\Ui\DataProvider\Meteomatics\ListingDataProvider" name="meteomatics_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>weather_meteomatics_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters">
+            <filterSelect name="store_id" provider="${ $.parentName }">
+                <settings>
+                    <options class="Magento\Store\Ui\Component\Listing\Column\Store\Options"/>
+                    <caption translate="true">All Store Views</caption>
+                    <label translate="true">Store View</label>
+                    <dataScope>store_id</dataScope>
+                </settings>
+            </filterSelect>
+        </filters>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="meteomatics_columns">
+        <column name="weather_meteomatics_id" sortOrder="20">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <label translate="true">ID</label>
+            </settings>
+        </column>
+        <column name="created" sortOrder="10">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <label translate="true">Date</label>
+            </settings>
+        </column>
+        <column name="wind_speed_10m" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <label translate="true">Wind speed</label>
+            </settings>
+        </column>
+        <column name="wind_dir_10m" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <label translate="true">Wind direction</label>
+            </settings>
+        </column>
+        <column name="t_2m" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <label translate="true">Temperature</label>
+            </settings>
+        </column>
+        <column name="t_max_2m_24h" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <label translate="true">Maximum temperature 24h</label>
+            </settings>
+        </column>
+        <column name="t_min_2m_24h" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <label translate="true">Minimum temperature 24h</label>
+            </settings>
+        </column>
+        <column name="msl_pressure" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <label translate="true">Pressure</label>
+            </settings>
+        </column>
+        <column name="precip_1h" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <label translate="true">Precipitation</label>
+            </settings>
+        </column>
+        <column name="sunrise" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <label translate="true">Sunrise</label>
+            </settings>
+        </column>
+        <column name="sunset" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <label translate="true">Sunset</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <columns name="store_columns">
+        <column name="latitude" component="Magento_Ui/js/grid/columns/select" sortOrder="76">
+            <settings>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Latitude</label>
+            </settings>
+        </column>
+        <dataSource name="store_listing_data_source" component="Magento_Ui/js/grid/provider">
+            <settings>
+                <storageConfig>
+                    <param name="dataScope" xsi:type="string">filters.store_id</param>
+                </storageConfig>
+                <updateUrl path="mui/index/render"/>
+            </settings>
+            <aclResource>Magento_Store::stores</aclResource>
+            <dataProvider class="Magento\Store\Ui\DataProvider\Store\ProductDataProvider" name="product_listing_data_source">
+                <settings>
+                    <requestFieldName>id</requestFieldName>
+                    <primaryFieldName>weather_meteomatics_id</primaryFieldName>
+                </settings>
+            </dataProvider>
+        </dataSource>
+    </columns>
+</listing>

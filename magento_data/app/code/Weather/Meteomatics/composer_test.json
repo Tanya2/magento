@@ -1,0 +1,10 @@
+{
+    "name": "Tanya2/magento2",
+    "description": "Weather_Meteomatics module",
+    "minimum-stability": "stable",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "require": {
+        "magento/magento-composer-installer": "*"
+    }
+}

@@ -1,0 +1,32 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="weather_meteomatics" resource="default" engine="innodb" comment="Weather Meteomatics Table">
+        <column xsi:type="int" name="weather_meteomatics_id" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="decimal" name="latitude" scale="6" precision="20" nullable="false" comment="Latitude"/>
+        <column xsi:type="decimal" name="longitude" scale="6" precision="20" nullable="false" comment="Longitude"/>
+        <column xsi:type="varchar" name="wind_speed_10m" nullable="true" length="64" comment="Instantaneous wind speed at 10m above ground"/>
+        <column xsi:type="varchar" name="wind_dir_10m" nullable="true" length="64" comment="Instantaneous wind direction at 10m above ground in degrees"/>
+        <column xsi:type="varchar" name="t_2m" nullable="true" length="64" comment="Instantaneous temperature at 2m above ground in degrees"/>
+        <column xsi:type="varchar" name="t_max_2m_24h" nullable="true" length="64" comment="Maximum temperature at 2m height in the previous 24h"/>
+        <column xsi:type="varchar" name="t_min_2m_24h" nullable="true" length="64" comment="Minimum temperature at 2m height in the previous 24h"/>
+        <column xsi:type="varchar" name="msl_pressure" nullable="true" length="64" comment="Mean sea level pressure"/>
+        <column xsi:type="varchar" name="precip_1h" nullable="true" length="64" comment="Precipitation accumulated over the past hour in millimeter"/>
+        <column xsi:type="varchar" name="sunrise" nullable="true" length="64" comment="Sunrise"/>
+        <column xsi:type="varchar" name="sunset" nullable="true" length="64" comment="Sunset"/>
+        <column xsi:type="timestamp" name="created" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Creation Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="weather_meteomatics_id"/>
+        </constraint>
+    </table>
+    <table name="store_locator" resource="default" engine="innodb" comment="Store locator">
+        <column xsi:type="int" name="store_locator_id" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="decimal" name="store_id" scale="6" precision="20" nullable="false" comment="Latitude"/>
+        <column xsi:type="decimal" name="latitude" scale="6" precision="20" nullable="false" comment="Latitude"/>
+        <column xsi:type="decimal" name="longitude" scale="6" precision="20" nullable="false" comment="Longitude"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="store_locator_id"/>
+        </constraint>
+    </table>
+</schema>
