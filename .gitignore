@@ -1,0 +1,13 @@
+# Ignore everything
+.idea/
+
+magento_data/*
+!magento_data/app/
+
+magento_data/app/*
+!magento_data/app/code/
+magento_data/app/code/*
+!magento_data/app/code/Weather/
+
+
+
